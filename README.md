@@ -7,6 +7,41 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+<hr />
+
+## About the Project
+
+### Tech Stack
+- Laravel 11.8.0
+- PHP 8.3.0
+- SQLite 3.35.0+
+
+### Installed Plugins
+- Laravel Breeze
+
+### Deployment
+- `composer install`
+- `php artisan migrate`
+- `php artisan key:generate`
+- `php breeze:install`
+- `npm install`
+
+### Development
+You may use your own local web server, but `php artisan serve` should be enough.
+
+### Pages
+- / - for Job Seekers to see a list of approved job posts
+- /login and /register - Job Board Members to create account
+- /dashboard - Job Board Members to manage job postings
+
+### Changes Done
+- Installed Laravel Breeze for login / registration
+- Created pages for Board Members and Job Seekers
+- Created queue to notify Board Member for new job post
+- Created sample page to post jobs
+
+<hr />
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
