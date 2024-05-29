@@ -30,10 +30,10 @@
             <nav class="-mx-3 flex flex-1 justify-end">
 
                 <a
-                    href="{{ url('/submit') }}"
+                    href="{{ url('/') }}"
                     class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                 >
-                    Submit Job Posting
+                    Home
                 </a>
 
                 @auth
@@ -65,18 +65,17 @@
     </header>
 
     <main class="col-md-12 mb-5">
-        <h1>Job Postings</h1>
+        <h1>{!! $position->name !!}</h1>
 
         <div class="row">
-            @foreach ($positions as $position)
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">{!! $position->name !!}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">{!! $position->company->company_name !!}</h6>
-                            <h6 class="card-subtitle mb-2">{!! ucfirst($position->employmentType->employment_type) !!}</h6>
+                            <h2 class="card-subtitle mb-2">{!! $position->company->company_name !!}</h2>
+                            <h5 class="card-subtitle mb-2 text-muted">{!! ucfirst($position->employmentType->employment_type) !!}</h5>
+                            <a href="#" onclick="return alert('Coming soon.')" class="link">Apply</a>
 
-{{--                            <hr />--}}
+                            <hr />
 
                             <p class="card-text">
                                 <ul>
@@ -91,11 +90,20 @@
 
                             <hr />
 
-                            <a href="{!! route('positions.job', $position->id) !!}" class="link">Details</a> | <a href="#" onclick="return alert('Coming soon.')" class="link">Apply</a>
+                            @foreach($position->jobDescriptions as $d)
+                                <p class="card-text">{!! $d->value !!}</p>
+                            @endforeach
+
+                            <hr />
+
+                            <p class="card-text text-muted">
+                            {!! $position->jobKeywords->pluck('keyword')->implode(', ') !!}
+                            </p>
+
+                            <a href="#" class="link"><a href="#" onclick="return alert('Coming soon.')" class="link">Apply</a>
                         </div>
                     </div>
                 </div>
-            @endforeach
         </div>
 
     </main>
