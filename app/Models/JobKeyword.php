@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class JobKeyword extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'position_id',
+        'keyword'
+    ];
 }
