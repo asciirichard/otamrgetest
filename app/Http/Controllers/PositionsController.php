@@ -107,4 +107,16 @@ class PositionsController extends Controller
         return redirect()->back();
 
     }
+
+    public function activate(Request $request)
+    {
+        Position::find($request->id)->update(['status' => Position::STATUS_ACTIVE]);
+        return json_encode(true);
+    }
+
+    public function deactivate(Request $request)
+    {
+        Position::find($request->id)->update(['status' => Position::STATUS_INACTIVE]);
+        return json_encode(true);
+    }
 }

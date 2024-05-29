@@ -9,6 +9,8 @@ Route::get('/job/{id}', [PositionsController::class, 'job'])->name('positions.jo
 
 Route::get('/submit', function () { return view('submit'); })->name('positions.submitform');
 Route::post('/submit', [PositionsController::class, 'submit'])->name('positions.submit');
+Route::post('/activate', [PositionsController::class, 'activate'])->name('positions.activate');
+Route::post('/deactivate', [PositionsController::class, 'deactivate'])->name('positions.deactivate');
 
 Route::get('/dashboard', [PositionsController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
