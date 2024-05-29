@@ -84,7 +84,8 @@ class FetchPositions extends Command
                         'years_to' => $yearsTo,
                         'occupation_id' => $occupation->id,
                         'occupation_category_id' => $occupationCategory->id,
-                        'created_by' => $createdAt
+                        'created_by' => $createdAt,
+                        'status' => Position::STATUS_ACTIVE
                     ]
                 );
 

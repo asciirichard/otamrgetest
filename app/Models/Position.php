@@ -28,7 +28,8 @@ class Position extends Model
         'years_to',
         'occupation_id',
         'occupation_category_id',
-        'created_at'
+        'created_at',
+        'status'
     ];
 
 }
