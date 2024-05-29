@@ -99,7 +99,7 @@
                             {!! $position->jobKeywords->pluck('keyword')->implode(', ') !!}
                             </p>
 
-                            <a href="#" class="link"><a href="#" onclick="return alert('Coming soon.')" class="link">Apply</a>
+                            <a href="#" onclick="return alert('Coming soon.')" class="link">Apply</a>
                         </div>
                     </div>
                 </div>
