@@ -66,44 +66,60 @@
 
         <main class="col-md-8 mb-5">
             <h1>Submit Job Posting</h1>
-            <form action="#" class="form">
+            <form method="POST" action="{!! route('positions.submit') !!}" class="form">
                 @csrf
-                <div class="form-group">
+                <div class="form-group mb-1">
+                    <label for="email">Your Email Address</label>
+                    <input class="form-control" name="email" id="email" type="email" required />
+                </div>
+                <div class="form-group mb-1">
                     <label for="company">Company</label>
                     <input class="form-control" name="company" id="company" required />
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-1">
                     <label for="office">Office</label>
                     <input class="form-control" name="office" id="office" required />
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-1">
                     <label for="department">Department</label>
                     <input class="form-control" name="department" id="department" required />
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-1">
                     <label for="recruitingCategory">Recruiting Category</label>
                     <input class="form-control" name="recruitingCategory" id="recruitingCategory" required />
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-1">
                     <label for="name">Name</label>
                     <input class="form-control" name="name" id="name" required />
                 </div>
                 <!-- Job Description Here -->
                 <div class="form-group mb-3">
                     <label for="employmentType">Employment Type</label>
-                    <input class="form-control" name="employmentType" id="employmentType" required />
+                    <select class="form-control" name="employmentType" id="employmentType" required>
+                        <option value="permanent">Permanent</option>
+                        <option value="temporary">Temporary</option>
+                        <option value="contractual">Contractual</option>
+                    </select>
                 </div>
                 <div class="form-group mb-3">
                     <label for="seniority">Seniority</label>
-                    <input class="form-control" name="seniority" id="seniority" required />
+                    <select class="form-control" name="seniority" id="seniority" required>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="experienced">Experienced</option>
+                    </select>
                 </div>
                 <div class="form-group mb-3">
                     <label for="schedule">Schedule</label>
-                    <input class="form-control" name="schedule" id="schedule" required />
+                    <select class="form-control" name="schedule" id="schedule" required>
+                        <option value="part-time">Part-time</option>
+                        <option value="full-time">Full-time</option>
+                    </select>
                 </div>
                 <div class="form-group mb-3">
                     <label for="yearsOfExperience">Years Of Experience</label>
-                    <input class="form-control" name="yearsOfExperience" id="yearsOfExperience" required />
+                    <input class="form-control" name="yearsOfExperience" id="yearsOfExperience" required placeholder="3-5" />
+                    <small>Format should be {MinimumYear}-{MaximumYear}</small>
                 </div>
                 <!-- Keywords Here -->
                 <div class="form-group mb-3">
@@ -114,6 +130,24 @@
                     <label for="occupationCategory">Occupation Category</label>
                     <input class="form-control" name="occupationCategory" id="occupationCategory" required />
                 </div>
+
+                <div class="form-group mb-3" id="descriptions">
+                    <label>Job Description/s</label>
+                    <div class="descriptions" id="description1">
+                        <input class="form-control" name="descriptionNames[]" placeholder="e.g. Your Tasks:">
+                        <textarea class="form-control" name="descriptionValues[]" placeholder="Your job description here..."></textarea>
+                        <a href="#" onclick="return addDescription()">+ Add Description</a>
+                    </div>
+                </div>
+
+                <div class="form-group mb-3" id="keywords">
+                    <label>Job Keyword/s</label>
+                    <div class="keywords" id="keyword1">
+                        <input class="form-control" name="keywords[]">
+                        <a href="#" onclick="return addKeyword()">+ Add Keyword</a>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <button class="btn btn-lg btn-dark"><span>Submit</span></button>
                 </div>
@@ -124,6 +158,55 @@
         <footer class="col-md-8">
             Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
         </footer>
+
+        <script>
+
+            var descriptionCount = 1;
+            function addDescription()
+            {
+                descriptionCount++;
+                let html = '<div class="descriptions" id="description' + descriptionCount + '">';
+                html += '<input class="form-control" name="descriptionNames[]" placeholder="e.g. Your Tasks:">';
+                html += '<textarea class="form-control" name="descriptionValues[]"></textarea>';
+                html += '<a href="#" onclick="return addDescription()">+ Add Description</a>';
+                html += ' | <a href="#" onclick="return removeDescription(' + descriptionCount + ')">+ Remove</a>'
+
+                $("#descriptions").append(html);
+                return false;
+
+            }
+
+            function removeDescription(count)
+            {
+                $("#description" + count).remove();
+                descriptionCount--;
+
+                return false;
+            }
+
+            var keywordCount = 1;
+            function addKeyword()
+            {
+                keywordCount++;
+
+                let html = '<div class="keywords" id="keyword' + keywordCount + '">';
+                html += '<input class="form-control" name="keywords[]">';
+                html += '<a href="#" onclick="return addKeyword()">+ Add Keyword</a>';
+                html += ' | <a href="#" onclick="return removeKeyword(' + keywordCount + ')">+ Remove</a>'
+
+                $("#keywords").append(html);
+                return false;
+
+            }
+
+            function removeKeyword(count)
+            {
+                $("#keyword" + count).remove();
+                keywordCount--;
+
+                return false;
+            }
+        </script>
     </div>
 </body>
 </html>

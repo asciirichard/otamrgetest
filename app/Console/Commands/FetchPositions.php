@@ -63,7 +63,7 @@ class FetchPositions extends Command
                 $yearsTo = $yearsOfExperienceArray[1];
 
                 $occupationCategory = OccupationCategory::updateOrCreate(['occupation_category_name' => (string) $p->occupationCategory]);
-                $occupation = Occupation::updateOrCreate(['occupation_category_id' => $occupationCategory, 'occupation_name' => (string) $p->occupation]);
+                $occupation = Occupation::updateOrCreate(['occupation_category_id' => $occupationCategory->id, 'occupation_name' => (string) $p->occupation]);
                 $createdAt = (string) $p->createdAt;
 
                 $position = Position::updateOrCreate(

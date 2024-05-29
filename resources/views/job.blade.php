@@ -77,20 +77,19 @@
 
                             <hr />
 
-                            <p class="card-text">
-                                <ul>
-                                    <li>Office: <b>{!! $position->office->office_name !!}</b></li>
-                                    <li>Department: <b>{!! $position->department->department_name !!}</b></li>
-                                    <li>Category: <b>{!! $position->recruitingCategory->recruiting_category_name !!}</b></li>
-                                    <li>Seniority: <b>{!! ucfirst($position->seniority->seniority) !!}</b></li>
-                                    <li>Years of Experience: <b>{!! $position->years_from !!} - {!! $position->years_to !!} years</b></li>
-                                    <li>Schedule: <b>{!! ucfirst($position->schedule->schedule) !!}</b></li>
-                                </ul>
-                            </p>
+                            <ul>
+                                <li>Office: <b>{!! $position->office->office_name !!}</b></li>
+                                <li>Department: <b>{!! $position->department->department_name !!}</b></li>
+                                <li>Category: <b>{!! $position->recruitingCategory->recruiting_category_name !!}</b></li>
+                                <li>Seniority: <b>{!! ucfirst($position->seniority->seniority) !!}</b></li>
+                                <li>Years of Experience: <b>{!! $position->years_from !!} - {!! $position->years_to !!} years</b></li>
+                                <li>Schedule: <b>{!! ucfirst($position->schedule->schedule) !!}</b></li>
+                            </ul>
 
                             <hr />
 
                             @foreach($position->jobDescriptions as $d)
+                                <p class="card-text fw-semibold mb-1">{!! $d->name !!}</p>
                                 <p class="card-text">{!! $d->value !!}</p>
                             @endforeach
 

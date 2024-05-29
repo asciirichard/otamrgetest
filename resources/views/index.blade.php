@@ -65,29 +65,35 @@
     </header>
 
     <main class="col-md-12 mb-5">
+
+        @if(Session::has('success'))
+            <div class="alert alert-primary" role="alert">
+                {!! Session::get('success') !!}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
         <h1>Job Postings</h1>
 
         <div class="row">
             @foreach ($positions as $position)
-                <div class="col-md-6">
+                <div class="col-md-6 mb-4">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{!! $position->name !!}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">{!! $position->company->company_name !!}</h6>
-                            <h6 class="card-subtitle mb-2">{!! ucfirst($position->employmentType->employment_type) !!}</h6>
+                            <h6 class="card-subtitle mb-2">{!! $position->company->company_name !!}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">{!! ucfirst($position->employmentType->employment_type) !!}</h6>
 
-{{--                            <hr />--}}
-
-                            <p class="card-text">
-                                <ul>
-                                    <li>Office: <b>{!! $position->office->office_name !!}</b></li>
-                                    <li>Department: <b>{!! $position->department->department_name !!}</b></li>
-                                    <li>Category: <b>{!! $position->recruitingCategory->recruiting_category_name !!}</b></li>
-                                    <li>Seniority: <b>{!! ucfirst($position->seniority->seniority) !!}</b></li>
-                                    <li>Years of Experience: <b>{!! $position->years_from !!} - {!! $position->years_to !!} years</b></li>
-                                    <li>Schedule: <b>{!! ucfirst($position->schedule->schedule) !!}</b></li>
-                                </ul>
-                            </p>
+                            <ul>
+                                <li>Office: <b>{!! $position->office->office_name !!}</b></li>
+                                <li>Department: <b>{!! $position->department->department_name !!}</b></li>
+                                <li>Category: <b>{!! $position->recruitingCategory->recruiting_category_name !!}</b></li>
+                                <li>Seniority: <b>{!! ucfirst($position->seniority->seniority) !!}</b></li>
+                                <li>Years of Experience: <b>{!! $position->years_from !!} - {!! $position->years_to !!} years</b></li>
+                                <li>Schedule: <b>{!! ucfirst($position->schedule->schedule) !!}</b></li>
+                            </ul>
 
                             <hr />
 
