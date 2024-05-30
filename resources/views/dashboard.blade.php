@@ -134,59 +134,24 @@
         {
             const c = confirm('Confirm approval of Job ID ' + id + '?');
             if (c) {
-                $.ajax({
-                    method: 'POST',
-                    url: "{!! route('positions.activate') !!}",
-                    data: {
-                        _token: '{!! csrf_token() !!}',
-                        id: id
-                    },
-                    success: function(result){
-                        $("#div1").html(result);
-                    }
-                });
-
-                window.location.reload();
+                window.location.href = '{!! url('activate') !!}' + '/' + id;
             }
         }
 
         function confirmDeactivate(id)
         {
+
             const c = confirm('Confirm deactivate of Job ID ' + id + '?');
             if (c) {
-                $.ajax({
-                    method: 'POST',
-                    url: "{!! route('positions.deactivate') !!}",
-                    data: {
-                        _token: '{!! csrf_token() !!}',
-                        id: id
-                    },
-                    success: function(result){
-                        $("#div1").html(result);
-                    }
-                });
-
-                window.location.reload();
+                window.location.href = '{!! url('deactivate') !!}' + '/' + id;
             }
         }
 
         function confirmSpam(id)
         {
-            const c = confirm('Confirm deactivate of Job ID ' + id + '?');
+            const c = confirm('Confirm mark of Job ID ' + id + ' as spam?');
             if (c) {
-                $.ajax({
-                    method: 'POST',
-                    url: "{!! route('positions.spam') !!}",
-                    data: {
-                        _token: '{!! csrf_token() !!}',
-                        id: id
-                    },
-                    success: function(result){
-                        $("#div1").html(result);
-                    }
-                });
-
-                window.location.reload();
+                window.location.href = '{!! url('spam') !!}' + '/' + id;
             }
         }
     </script>

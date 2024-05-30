@@ -39,7 +39,9 @@ class FirstJobPosting extends Notification
                     ->line('New User Job Posting.')
                     ->line('Job ID: ' . $this->position->id)
                     ->line('Email: ' . $this->position->email)
-                    ->action('Open Dashboard', route('dashboard'));
+                    ->line('<a href="' . route('dashboard') . '">Dashboard</a>')
+                    ->line('<a href="' . route('positions.activate', $this->position->id) . '"Approve</a>')
+                    ->line('<a href="' . route('positions.spam', $this->position->id) . '">Mark as Spam</a>');
     }
 
     /**

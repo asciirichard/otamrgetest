@@ -109,21 +109,21 @@ class PositionsController extends Controller
 
     }
 
-    public function activate(Request $request)
+    public function activate($id)
     {
-        Position::find($request->id)->update(['status' => Position::STATUS_ACTIVE]);
-        return json_encode(true);
+        Position::find($id)->update(['status' => Position::STATUS_ACTIVE]);
+        return redirect()->back();
     }
 
-    public function deactivate(Request $request)
+    public function deactivate($id)
     {
-        Position::find($request->id)->update(['status' => Position::STATUS_INACTIVE]);
-        return json_encode(true);
+        Position::find($id)->update(['status' => Position::STATUS_INACTIVE]);
+        return redirect()->back();
     }
 
-    public function spam(Request $request)
+    public function spam($id)
     {
-        Position::find($request->id)->update(['status' => Position::STATUS_SPAM]);
-        return json_encode(true);
+        Position::find($id)->update(['status' => Position::STATUS_SPAM]);
+        return redirect()->back();
     }
 }
