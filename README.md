@@ -53,6 +53,8 @@ You may use your own local web server, but `php artisan serve` should be enough.
 - Modify email sending to include links
 - Set command to run hourly
 - Call artisan command on page load
+- Generic search on dashboard
+- README update
 
 <hr />
 

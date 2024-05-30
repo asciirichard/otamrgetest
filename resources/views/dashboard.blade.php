@@ -8,6 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="container mx-auto p-4">
+                <input class="mb-10 w-full rounded" placeholder="Search here..." onkeyup="return genericSearch(this)" />
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
                     @foreach ($positions as $position)
                         <div class="w-full mb-0">
@@ -49,7 +50,7 @@
 
                                     <hr />
 
-                                    <div class="pt-4">
+                                    <div class="pt-4 cta">
                                         <a href="#" onclick="openModal({!! $position->id !!})" class="pr-2 py-12">View Details</a>
                                         |
                                         @if($position->status == \App\Models\Position::STATUS_ACTIVE)
@@ -154,5 +155,23 @@
                 window.location.href = '{!! url('spam') !!}' + '/' + id;
             }
         }
+
+        function genericSearch(input) {
+            let query = $(input).val().toLowerCase();
+
+            $('.w-full.mb-0').each(function() {
+                let cardClone = $(this).clone();
+                cardClone.find('.cta, .hidden').remove();
+                let cardText = cardClone.text().toLowerCase();
+
+                if (cardText.includes(query)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+
+
     </script>
 </x-app-layout>
