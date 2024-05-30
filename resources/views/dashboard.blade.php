@@ -14,7 +14,7 @@
                             <div class="@if($position->status == \App\Models\Position::STATUS_ACTIVE) bg-white @else bg-gray-300 @endif rounded overflow-hidden shadow-lg">
                                 <div class="px-12 py-6">
                                     <div class="font-bold text-l mb-0">Job ID: {!! $position->id !!} @if($position->status == \App\Models\Position::STATUS_INACTIVE) <span class="text-red-600">(INACTIVE)</span> @endif</div>
-                                    <div class="font-bold text-l mb-0">{!! $position->name !!}</div>
+                                    <div class="text-l mb-0">Job Title: <span class="font-bold">{!! $position->name !!}</span></div>
                                     <div class="text-l mb-0">Company: <span class="font-bold">{!! $position->company->company_name !!}</span></div>
                                     <div class="text-l mb-2">Employment Type: <span class="font-bold">{!! ucfirst($position->employmentType->employment_type) !!}</span></div>
                                     @if($position->email)
@@ -67,9 +67,7 @@
     <div id="modal" class="overflow-auto fixed inset-0 hidden items-center justify-center bg-black bg-opacity-50 z-50 rounded-lg">
         <div class="bg-white overflow-hidden shadow-lg max-w-7xl w-full mx-auto rounded-lg">
             <div class="px-12 py-6">
-                <div id="modal-content">
-                    <!-- Dynamic content will be loaded here -->
-                </div>
+                <div id="modal-content"></div>
                 <button onclick="closeModal()" class="mt-4 bg-gray-500 text-white px-4 py-1 rounded">Close</button>
             </div>
         </div>

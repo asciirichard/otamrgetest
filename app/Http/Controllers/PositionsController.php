@@ -14,6 +14,7 @@ use App\Models\Position;
 use App\Models\RecruitingCategory;
 use App\Models\Schedule;
 use App\Models\Seniority;
+use App\Notifications\FirstJobPosting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -98,10 +99,10 @@ class PositionsController extends Controller
         }
 
 //        // check if this is the first job post by email
-//        $emailCount = Position::where('email', $request->email)->count();
-//        if ($emailCount == 1) {
-//            // notify the moderator about the new job position
-//        }
+        $emailCount = Position::where('email', $request->email)->count();
+        if ($emailCount == 1) {
+            $position->notify(new FirstJobPosting($position));
+        }
 
         Session::flash('success', 'Job Position added successfully. The moderator will check the details for approval.');
         return redirect()->back();

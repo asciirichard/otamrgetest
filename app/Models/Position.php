@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Notifications\Notifiable;
 
 class Position extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 0;
@@ -19,6 +19,7 @@ class Position extends Model
 
     protected $fillable = [
         'id',
+        'email',
         'company_id',
         'office_id',
         'department_id',
