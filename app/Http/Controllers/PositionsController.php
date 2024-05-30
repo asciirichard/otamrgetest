@@ -120,4 +120,10 @@ class PositionsController extends Controller
         Position::find($request->id)->update(['status' => Position::STATUS_INACTIVE]);
         return json_encode(true);
     }
+
+    public function spam(Request $request)
+    {
+        Position::find($request->id)->update(['status' => Position::STATUS_SPAM]);
+        return json_encode(true);
+    }
 }

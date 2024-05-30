@@ -11,6 +11,7 @@ Route::get('/submit', function () { return view('submit'); })->name('positions.s
 Route::post('/submit', [PositionsController::class, 'submit'])->name('positions.submit');
 Route::post('/activate', [PositionsController::class, 'activate'])->name('positions.activate');
 Route::post('/deactivate', [PositionsController::class, 'deactivate'])->name('positions.deactivate');
+Route::post('/spam', [PositionsController::class, 'spam'])->name('positions.spam');
 
 Route::get('/dashboard', [PositionsController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 

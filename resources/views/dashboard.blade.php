@@ -11,9 +11,13 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
                     @foreach ($positions as $position)
                         <div class="w-full mb-0">
-                            <div class="@if($position->status == \App\Models\Position::STATUS_ACTIVE) bg-white @else bg-gray-300 @endif rounded overflow-hidden shadow-lg">
+                            <div class="@if($position->status == \App\Models\Position::STATUS_ACTIVE) bg-white @elseif($position->status == \App\Models\Position::STATUS_SPAM) bg-red-200 @else bg-gray-300 @endif rounded overflow-hidden shadow-lg">
                                 <div class="px-12 py-6">
-                                    <div class="font-bold text-l mb-0">Job ID: {!! $position->id !!} @if($position->status == \App\Models\Position::STATUS_INACTIVE) <span class="text-red-600">(INACTIVE)</span> @endif</div>
+                                    <div class="font-bold text-l mb-0">Job ID: {!! $position->id !!}
+                                        @if($position->status == \App\Models\Position::STATUS_INACTIVE) <span class="text-blue-600">(INACTIVE)</span>
+                                        @elseif($position->status == \App\Models\Position::STATUS_SPAM) <span class="text-red-700">(SPAM)</span>
+                                        @endif
+                                    </div>
                                     <div class="text-l mb-0">Job Title: <span class="font-bold">{!! $position->name !!}</span></div>
                                     <div class="text-l mb-0">Company: <span class="font-bold">{!! $position->company->company_name !!}</span></div>
                                     <div class="text-l mb-2">Employment Type: <span class="font-bold">{!! ucfirst($position->employmentType->employment_type) !!}</span></div>
@@ -51,7 +55,11 @@
                                         @if($position->status == \App\Models\Position::STATUS_ACTIVE)
                                             <a href="#" onclick="confirmDeactivate({!! $position->id !!})" class="pl-2 py-12">Deactivate</a>
                                         @else
-                                            <a href="#" onclick="confirmActivate({!! $position->id !!})" class="pl-2 py-12">Activate</a>
+                                            <a href="#" onclick="confirmActivate({!! $position->id !!})" class="px-2 py-12">Activate</a>
+                                        @endif
+                                        @if($position->status != \App\Models\Position::STATUS_SPAM)
+                                            |
+                                            <a href="#" onclick="confirmSpam({!! $position->id !!})" class="pl-2 py-12">Mark as Spam</a>
                                         @endif
                                     </div>
                                 </div>
@@ -149,6 +157,26 @@
                 $.ajax({
                     method: 'POST',
                     url: "{!! route('positions.deactivate') !!}",
+                    data: {
+                        _token: '{!! csrf_token() !!}',
+                        id: id
+                    },
+                    success: function(result){
+                        $("#div1").html(result);
+                    }
+                });
+
+                window.location.reload();
+            }
+        }
+
+        function confirmSpam(id)
+        {
+            const c = confirm('Confirm deactivate of Job ID ' + id + '?');
+            if (c) {
+                $.ajax({
+                    method: 'POST',
+                    url: "{!! route('positions.spam') !!}",
                     data: {
                         _token: '{!! csrf_token() !!}',
                         id: id
