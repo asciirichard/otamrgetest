@@ -17,6 +17,7 @@ use App\Models\Seniority;
 use App\Notifications\FirstJobPosting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Session;
 
 class PositionsController extends Controller
@@ -24,6 +25,7 @@ class PositionsController extends Controller
     //
     public function index()
     {
+        Artisan::call('app:fetch-positions');
         $positions = Position::where('status', Position::STATUS_ACTIVE)->get();
 
         return view('index', compact('positions'));
