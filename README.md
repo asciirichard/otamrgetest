@@ -24,21 +24,35 @@
 - `php artisan migrate`
 - `php artisan key:generate`
 - `php breeze:install`
+
+The assets are already built, but you can recompile using the following commands
 - `npm install`
+- `npm run build`
 
 ### Development
 You may use your own local web server, but `php artisan serve` should be enough.
 
 ### Pages
 - / - for Job Seekers to see a list of approved job posts
+- /job/{id} - Show job details
+- /submit - fill up form to add job postings
 - /login and /register - Job Board Members to create account
 - /dashboard - Job Board Members to manage job postings
 
-### Changes Done
-- Installed Laravel Breeze for login / registration
-- Created pages for Board Members and Job Seekers
-- Created queue to notify Board Member for new job post
-- Created sample page to post jobs
+### Changelog
+- Installed Laravel Breeze
+- Setup Database and model definition
+- Added table views on frontend
+- Created Console Command on fetching API
+- Set all fetched positions as active
+- Job submission page
+- Job submission page
+- Activate and deactivate job postings
+- Send notification for first time job postings
+- Mark as spam
+- Modify email sending to include links
+- Set command to run hourly
+- Call artisan command on page load
 
 <hr />
 
